@@ -1,15 +1,16 @@
 package almaember.mods.core;
 
-import jdk.vm.ci.meta.Assumptions;
+import almaember.mods.core.recipes.simple.SimpleRecipe;
+import almaember.mods.core.recipes.simple.SimpleRecipeManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.crash.CrashReport;
 import org.apache.logging.log4j.*;
 import net.minecraft.util.crash.CrashException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -25,7 +26,7 @@ public class AlmaemberCoreMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// setup logger
-		Logger logger = LogManager.getLogger("almaembercore");
+		Logger logger = LogManager.getLogger();
 		String modConfigPath = CONFIG_DIR + "/almaembercore.properties";
 		// make config files if necessary
 		probeForConfig(logger, modConfigPath);
@@ -40,6 +41,20 @@ public class AlmaemberCoreMod implements ModInitializer {
 					new CrashReport("Failed to load AlmaemberCore config file.", new IOException())
 			);
 		}
+		selfTest(logger);
+	}
+
+	private void selfTest(Logger logger) {
+		SimpleRecipeManager srm = SimpleRecipeManager.getInstance();
+		srm.createRecipeVault(new Identifier("almaembercore", "test"));
+		srm.addRecipe(new Identifier("almaembercore", "test"), new SimpleRecipe(
+				new Identifier("minecraft", "apple"), new Identifier("minecraft", "paper")
+		));
+		logger.info(srm.getRecipeByIngredient(
+				new Identifier("almaembercore", "test"),
+				new Identifier("minecraft", "apple"))
+				.getResult().toString()
+		);
 	}
 
 	private void probeForConfig(Logger logger, String modConfigPath) {

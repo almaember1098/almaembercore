@@ -45,22 +45,7 @@ public class AlmaemberCoreMod implements ModInitializer {
 	}
 
 	private void selfTest(Logger logger) {
-		SimpleRecipeManager srm = SimpleRecipeManager.getInstance();
-		srm.createRecipeVault(new Identifier("almaembercore", "test"));
-		srm.addRecipe(new Identifier("almaembercore", "test"), new SimpleRecipe(
-				new Identifier("minecraft", "apple"), new Identifier("minecraft", "paper")
-		));
-		logger.info(srm.getRecipeByIngredient(
-				new Identifier("almaembercore", "test"),
-				new Identifier("minecraft", "apple"))
-				.getResult().toString()
-		);
-		srm.flushRecipes(new Identifier("almaembercore", "test"));
-		logger.info(srm.getRecipeByIngredient(
-				new Identifier("almaembercore", "test"),
-				new Identifier("minecraft", "apple"))
-				.getResult().toString()
-		);
+		// nothing is here atm
 	}
 
 	private void probeForConfig(Logger logger, String modConfigPath) {

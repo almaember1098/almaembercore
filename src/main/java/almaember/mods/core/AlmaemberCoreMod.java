@@ -55,6 +55,12 @@ public class AlmaemberCoreMod implements ModInitializer {
 				new Identifier("minecraft", "apple"))
 				.getResult().toString()
 		);
+		srm.flushRecipes(new Identifier("almaembercore", "test"));
+		logger.info(srm.getRecipeByIngredient(
+				new Identifier("almaembercore", "test"),
+				new Identifier("minecraft", "apple"))
+				.getResult().toString()
+		);
 	}
 
 	private void probeForConfig(Logger logger, String modConfigPath) {

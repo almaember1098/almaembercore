@@ -33,6 +33,7 @@ public class SimpleRecipeManager {
 
     public void flushRecipes(Identifier vault) {
         recipeBank.get(vault).clear();
+        logger.info("Flushed recipes for vault: " + vault.toString());
     }
 
     private static SimpleRecipeManager instance = null;

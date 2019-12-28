@@ -45,7 +45,7 @@ public class AlmaemberCoreMod implements ModInitializer {
 	}
 
 	private void selfTest(Logger logger) {
-		// nothing is here atm
+		// empty rn
 	}
 
 	private void probeForConfig(Logger logger, String modConfigPath) {
